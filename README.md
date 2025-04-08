@@ -24,7 +24,6 @@ This implementation is particularly suited for:
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/mmusazzi/contextualbayesoptim.git
-cd contextualbayesoptim
 ```
 ### 2. Add the library to your MATLAB path
 
@@ -49,7 +48,7 @@ You can verify the toolbox is installed by running `ver` and checking for `Stati
 
 ## Usage
 
-The usage of the `ContextualBayesianOptimizer` class will be demonstrated through two minimal examples of typical problems:
+The usage of the `ContextualBayesianOptimizer` class will be demonstrated through two minimal examples of typical problems.
 
 ### Sequential decision-making problems
 
@@ -73,7 +72,7 @@ config.KernelName = 'ardmatern52';
 config.AcqFuncName = 'cgp-ucb';
 config.AcqFuncConfig.BetaEvolutionFuncHandle = @(iter) 2 * log(iter + 1);
 
-% Define parameters for the auxilliary optimizer (auxGlobalMaxSearch), used to maximize the acquisition function
+% Define parameters for the auxiliary optimizer (auxGlobalMaxSearch), used to maximize the acquisition function
 config.NumCandidates = 1e4;
 config.NumLocalSearches = 10;
 config.MaxIterLocalSearch = 10;
