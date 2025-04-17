@@ -82,7 +82,7 @@ config.RelTolLocalSearch = 1e-3;
 cbo = contextualbayesoptim.ContextualBayesianOptimizer(config);
 ```
 
-#### 2. Add observations
+#### 2. Add initially available observations
 
 ```matlab
 % Example observations
@@ -119,7 +119,13 @@ action = cbo.computeNextActionGivenContext(context);
 result = performAction(action); % Placeholder for the actual result measurement function
 ```
 
-#### 7. Go to 2.
+#### 7. Add the new observation to the optimizer
+
+```matlab
+cbo.addObservations(action, context, result);
+```
+
+#### 8. Go to 3.
 
 ### Optimal mapping reconstruction problems
 
