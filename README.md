@@ -57,13 +57,13 @@ This type of problem can be summarized as follows: at each iteration, we must ch
 #### 1. Create a `ContextualBayesianOptimizer` object
 
 ```matlab
-% Define dimensions of the search (action) and context spaces
-config.SearchSpaceDim = 2;
+% Define dimensions of the action and context spaces
+config.ActionSpaceDim = 2;
 config.ContextSpaceDim = 1;
 
-% Define lower and upper bounds for the search and context spaces
-config.SearchSpaceLB = [0, 0];
-config.SearchSpaceUB = [5, 5];
+% Define lower and upper bounds for the action and context spaces
+config.ActionSpaceLB = [0, 0];
+config.ActionSpaceUB = [5, 5];
 config.ContextSpaceLB = [0];
 config.ContextSpaceUB = [1];
 
@@ -86,7 +86,7 @@ cbo = contextualbayesoptim.ContextualBayesianOptimizer(config);
 
 ```matlab
 % Example observations
-actions = [1, 2; 2, 3];  % Actions (N x SearchSpaceDim matrix)
+actions = [1, 2; 2, 3];  % Actions (N x ActionSpaceDim matrix)
 contexts = [0.1; 0.2];   % Contexts (N x ContextSpaceDim matrix)
 results = [0.5; 0.8];    % Results (N x 1 vector)
 

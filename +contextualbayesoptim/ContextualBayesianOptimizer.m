@@ -7,17 +7,17 @@ classdef ContextualBayesianOptimizer < handle
     % Configuration parameters
 
         % CBO parameters
-        SearchSpaceDim {mustBeInteger, mustBePositive}  % Dimension of search space
+        ActionSpaceDim {mustBeInteger, mustBePositive}  % Dimension of action space
         ContextSpaceDim {mustBeInteger, mustBePositive} % Dimension of context space
-        SearchSpaceLB {mustBeNumeric}                   % Search space lower bound (1 x SearchSpaceDim row vector)
-        SearchSpaceUB {mustBeNumeric}                   % Search space upper bound (1 x SearchSpaceDim row vector)
+        ActionSpaceLB {mustBeNumeric}                   % Action space lower bound (1 x ActionSpaceDim row vector)
+        ActionSpaceUB {mustBeNumeric}                   % Action space upper bound (1 x ActionSpaceDim row vector)
         ContextSpaceLB {mustBeNumeric}                  % Context space lower bound (1 x ContextSpaceDim row vector)
         ContextSpaceUB {mustBeNumeric}                  % Context space upper bound (1 x ContextSpaceDim row vector)
         KernelName {mustBeTextScalar} = ''              % Name of the kernel function to be used
         AcqFuncName {mustBeTextScalar} = ''             % Name of the contextual acquisition function to be used
         AcqFuncConfig struct                            % Struct with contextual acquisition function configuration parameters
 
-        % Auxilliary optimizer (auxGlobalMaxSearch) parameters
+        % Auxiliary optimizer (auxGlobalMaxSearch) parameters
         NumCandidates {mustBeInteger, mustBePositive}       % Number of initial random candidates
         NumLocalSearches {mustBeInteger, mustBePositive}    % Number of local optimizer runs
         MaxIterLocalSearch {mustBeInteger, mustBePositive}  % Maximum iterations per local optimizer run
@@ -36,10 +36,10 @@ classdef ContextualBayesianOptimizer < handle
         function obj = ContextualBayesianOptimizer(config)
             % Constructor
 
-            obj.SearchSpaceDim = config.SearchSpaceDim;
+            obj.ActionSpaceDim = config.ActionSpaceDim;
             obj.ContextSpaceDim = config.ContextSpaceDim;
-            obj.SearchSpaceLB = config.SearchSpaceLB;
-            obj.SearchSpaceUB = config.SearchSpaceUB;
+            obj.ActionSpaceLB = config.ActionSpaceLB;
+            obj.ActionSpaceUB = config.ActionSpaceUB;
             obj.ContextSpaceLB = config.ContextSpaceLB;
             obj.ContextSpaceUB = config.ContextSpaceUB;
             obj.KernelName = config.KernelName;
@@ -83,8 +83,8 @@ classdef ContextualBayesianOptimizer < handle
             if (size(contexts, 1) ~= N || size(results, 1) ~= N)
                 error('Inconsistent dimensions for actions-contexts-results')
             end
-            if (dS ~= obj.SearchSpaceDim)
-                error('Size of actions is not compatible with SearchSpaceDim')
+            if (dS ~= obj.ActionSpaceDim)
+                error('Size of actions is not compatible with ActionSpaceDim')
             end
             if (dZ ~= obj.ContextSpaceDim)
                 error('Size of contexts is not compatible with ContextSpaceDim')
@@ -130,7 +130,7 @@ classdef ContextualBayesianOptimizer < handle
             %            the acquisition function will be evaluated
             %
             % Return values
-            %   s_next: (1 x SearchSpaceDim) vector with action to perform
+            %   s_next: (1 x ActionSpaceDim) vector with action to perform
 
             if (any(size(context) ~= [1, obj.ContextSpaceDim]))
                 error('Size of context is not consistent: it must be a (1 x ContextSpaceDim) vector')
@@ -142,7 +142,7 @@ classdef ContextualBayesianOptimizer < handle
             contextualAF = @(s) obj.AcqFunc.compute(obj.GP, s, repmat(context, size(s, 1), 1));
             
             s_next = contextualbayesoptim.auxGlobalMaxSearch(contextualAF, ...
-                                obj.SearchSpaceLB, obj.SearchSpaceUB, ...
+                                obj.ActionSpaceLB, obj.ActionSpaceUB, ...
                                 obj.NumCandidates, obj.NumLocalSearches, ...
                                 obj.MaxIterLocalSearch, obj.RelTolLocalSearch);
 
@@ -168,8 +168,8 @@ classdef ContextualBayesianOptimizer < handle
             if (size(actions, 1) ~= size(contexts, 1))
                 error('Inconsistent dimensions for actions-contexts')
             end
-            if (size(actions, 2) ~= obj.SearchSpaceDim)
-                error('Size of actions is not compatible with SearchSpaceDim')
+            if (size(actions, 2) ~= obj.ActionSpaceDim)
+                error('Size of actions is not compatible with ActionSpaceDim')
             end
             if (size(contexts, 2) ~= obj.ContextSpaceDim)
                 error('Size of contexts is not compatible with ContextSpaceDim')
@@ -207,8 +207,8 @@ classdef ContextualBayesianOptimizer < handle
             if (size(actions, 1) ~= size(contexts, 1))
                 error('Inconsistent dimensions for actions-contexts')
             end
-            if (size(actions, 2) ~= obj.SearchSpaceDim)
-                error('Size of actions is not compatible with SearchSpaceDim')
+            if (size(actions, 2) ~= obj.ActionSpaceDim)
+                error('Size of actions is not compatible with ActionSpaceDim')
             end
             if (size(contexts, 2) ~= obj.ContextSpaceDim)
                 error('Size of contexts is not compatible with ContextSpaceDim')
