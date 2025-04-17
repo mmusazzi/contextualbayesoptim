@@ -9,7 +9,7 @@ classdef CGPUCB < contextualbayesoptim.ContextualAcquisitionFunction
         BetaEvolutionFuncHandle function_handle = @(iter) 4   % Handle to a function implementing the evolution
                                                               %   over iterations of the "Beta" parameter of CGP-UCB
         % State
-        BetaUCB {mustBePositive}                              % "Beta" parameter of CGP-UCB
+        BetaUCB {mustBeNonnegative}                           % "Beta" parameter of CGP-UCB
         Iteration {mustBeInteger, mustBeNonnegative}          % Iteration value used to compute BetaUCB
 
     end
