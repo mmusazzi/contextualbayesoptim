@@ -137,7 +137,7 @@ TO-DO
 
 ## Examples
 
-TO-DO
+- `sequential_decision_cgpucb.m`: Example of using the `ContextualBayesianOptimizer` class for **sequential decision-making** in a 1D action × 1D context space, utilizing the **CGP-UCB** acquisition function.
 
 ## References
 
