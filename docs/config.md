@@ -27,18 +27,18 @@ This file documents all configuration parameters available for initializing a `C
 |------------------------------|-------------------|-----------------------------------------------------------------------------|------------------------------|
 | `AcqFuncName`                | String            | Name of the acquisition function                                            | `'cgp-ucb'`                  |
 
-#### Possible values for `AcqFuncName`:
-- `'cgp-ucb'` – Contextual GP Upper Confidence Bound (See [Krause and Ong (2011)](#reference-2))
+> #### Possible values for `AcqFuncName`:
+> - `'cgp-ucb'` – Contextual GP Upper Confidence Bound (See [Krause and Ong (2011)](#reference-2))
 
 | Parameter                     | Type              | Description                                                                 | Example                      |
 |------------------------------|-------------------|-----------------------------------------------------------------------------|------------------------------|
 | `AcqFuncConfig`              | Struct            | Additional configuration for the acquisition function                      | `struct()`                     |
 
-#### `AcqFuncConfig` fields for `AcqFuncName = 'cgp-ucb'`:
-
-| Field                     | Type              | Description                                                                 | Example                      |
-|------------------------------|-------------------|-----------------------------------------------------------------------------|------------------------------|
-| `AcqFuncConfig.BetaEvolutionFuncHandle` | function_handle | Evolution over iterations of the 'BetaUCB' parameter of CGP-UCB  | `@(iter) 2 * log(iter .^ 2)`  |
+>#### `AcqFuncConfig` fields for `AcqFuncName = 'cgp-ucb'`:
+>
+>| Field                     | Type              | Description                                                                 | Example                      |
+>|------------------------------|-------------------|-----------------------------------------------------------------------------|------------------------------|
+>| `AcqFuncConfig.BetaEvolutionFuncHandle` | function_handle | Evolution over iterations of the 'BetaUCB' parameter of CGP-UCB  | `@(iter) 2 * log(iter .^ 2)`  |
 
 ## Acquisition function maximization (Auxiliary Optimizer parameters)
 
