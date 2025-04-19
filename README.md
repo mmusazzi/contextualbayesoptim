@@ -15,9 +15,10 @@ This implementation is particularly suited for:
 2. [Usage](#usage)
 	- [Sequential decision-making problems](#sequential-decision-making-problems)
     - [Optimal mapping reconstruction problems](#optimal-mapping-reconstruction-problems)
-3. [Examples](#examples)
-4. [References](#references)
-5. [License](#license)
+3. [Configuration](#configuration)
+4. [Examples](#examples)
+5. [References](#references)
+6. [License](#license)
 
 ## Installation
 
@@ -70,7 +71,7 @@ config.ContextSpaceUB = [1];
 % Define GPR kernel and contextual acquisition function
 config.KernelName = 'ardmatern52';
 config.AcqFuncName = 'cgp-ucb';
-config.AcqFuncConfig.BetaEvolutionFuncHandle = @(iter) 2 * log(iter + 1);
+config.AcqFuncConfig.BetaEvolutionFuncHandle = @(iter) 2 * log(iter .^ 2);
 
 % Define parameters for the auxiliary optimizer (auxGlobalMaxSearch), used to maximize the acquisition function
 config.NumCandidates = 1e4;
@@ -134,6 +135,10 @@ In this case, the objective is to estimate the optimal mapping between context a
 #### 1. TO-DO
 
 TO-DO
+
+## Configuration
+
+Detailed documentation of the configuration parameters used to initialize the `ContextualBayesianOptimizer` class is available in [docs/config.md](docs/config.md).
 
 ## Examples
 
